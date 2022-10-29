@@ -4,8 +4,8 @@ import {MongoClient} from "mongodb"
 import dotenv from "dotenv"
 import { moviesRouter } from "./routers/movies.js";
  
-// dotenv.config()
-// console.log(process.env)
+dotenv.config()
+
 
 const app = express()
 const PORT = 4000;
@@ -52,10 +52,10 @@ const PORT = 4000;
 //       "trailer": "https://www.youtube.com/embed/nnXpbTFrqXA"
 //     }
 //   ]
+const MONGO_URL = process.env.MONGO_URL;
  app.use(express.json()); 
   // const MONGO_URL = "mongodb://127.0.0.1"
-  const MONGO_URL = "mongodb+srv://ashwini:ashwini123@cluster0.2lrzq9i.mongodb.net"
-  // const MONGO_URL = process.env.MONGO_URL;
+  // const MONGO_URL = "mongodb+srv://ashwini:ashwini123@cluster0.2lrzq9i.mongodb.net"
   async  function createConnection(){
     const client = new MongoClient(MONGO_URL);
    await client.connect();
