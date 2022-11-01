@@ -21,6 +21,8 @@ router.post('/',async(req, res) => {
       console.log(data)
   
       //db.movies.insertMany(data)
+      //db.movies.insertOne(data)   for one movie
+
       const result = await createMovies(data)
       res.send(result)
 })
