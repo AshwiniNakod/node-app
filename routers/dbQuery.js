@@ -10,8 +10,14 @@ export async function deleteMovieById(id) {
 export async function getMovieByID(id) {
     return await client.db("ashwini").collection("movies").findOne({ _id:ObjectId(id) });
 }
+export async function getUserByName(username) {
+    return await client.db("ashwini").collection("users").findOne({ username : username});
+}
 export async function createMovies(data) {
     return await client.db("ashwini").collection("movies").insertOne(data);
+}
+export async function createUsers(data) {
+    return await client.db("ashwini").collection("users").insertOne(data);
 }
 export async function getAllMovies(req) {
     return await client.db("ashwini").collection("movies").find(req.query).toArray();

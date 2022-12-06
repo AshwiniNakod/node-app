@@ -1,9 +1,10 @@
 import express from "express";
+import { auth } from "../middleware/auth.js";
 import { getAllMovies, createMovies, getMovieByID, deleteMovieById, updateMovieById } from "./dbQuery.js";
 
 const router =express.Router();
 
-router.get('/', async(req, res) => {
+router.get('/',auth, async(req, res) => {
       //db.movies.find({})
       console.log(req.query);
         if(req.query.rating){
@@ -18,7 +19,7 @@ router.get('/', async(req, res) => {
   
 router.post('/',async(req, res) => {
       const data=req.body
-      console.log(data)
+      // console.log(data)
   
       //db.movies.insertMany(data)
       //db.movies.insertOne(data)   for one movie
@@ -28,28 +29,28 @@ router.post('/',async(req, res) => {
 })
   
   
-router.get('/:id',async (req, res) => {
+router.get('/:id',auth,async(req, res) => {
       const {id} = req.params;
-      console.log(req.params)
+      // console.log(req.params)
   
       // const movie=movies.find(mv => mv.id===id)
   
       const movie = await getMovieByID(id)
-      console.log(movie)
+      // console.log(movie)
   
       movie ?  res.send(movie) : res.status(404).send({'msg':'movie not found'})
       
 })
   
   
-router.delete('/:id',async (req, res) => {
+router.delete('/:id',async(req, res) => {
       const {id} = req.params;
-      console.log(req.params)
+      // console.log(req.params)
   
       // const movie=db.movies.deleleOne({id:100})
   
       const result = await deleteMovieById(id)
-      console.log(result)
+      // console.log(result)
   
       result.deletedCount > 0 ? 
       res.send({'msg':'movie deleted successfully.'}) : 
@@ -60,9 +61,9 @@ router.delete('/:id',async (req, res) => {
   
     router.put('/:id',async(req, res) => {
       const{id} = req.params
-      console.log(req.params)
+      // console.log(req.params)
       const data=req.body
-      console.log(data)
+      // console.log(data)
   
       //db.movies.insertMany(data)
       const result = await updateMovieById(id, data);
