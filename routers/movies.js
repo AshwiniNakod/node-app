@@ -43,7 +43,7 @@ router.get('/:id',auth,async(req, res) => {
 })
   
   
-router.delete('/:id',async(req, res) => {
+router.delete('/:id',auth,async(req, res) => {
       const {id} = req.params;
       // console.log(req.params)
   
@@ -70,6 +70,6 @@ router.delete('/:id',async(req, res) => {
       res.send(result)
     })
   
-    export const moviesRouter = router
+export const moviesRouter = router
 
 
